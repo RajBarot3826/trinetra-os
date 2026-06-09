@@ -12,8 +12,9 @@ export default function NetworkGraph() {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/network`)
-      .then((res) => res.json())
-      .then((data) => setGraphData(data));
+      .then((res) => res.ok ? res.json() : { nodes: [], links: [] })
+      .then((data) => setGraphData(data?.nodes ? data : { nodes: [], links: [] }))
+      .catch((err) => console.error(err));
 
     const updateDimensions = () => {
       if (containerRef.current) {

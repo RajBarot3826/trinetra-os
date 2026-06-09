@@ -28,12 +28,14 @@ export default function CrimeMap() {
     });
 
     fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/firs`)
-      .then((res) => res.json())
-      .then((data) => setFirs(data));
+      .then((res) => res.ok ? res.json() : [])
+      .then((data) => setFirs(Array.isArray(data) ? data.slice(0, 100) : []))
+      .catch((err) => console.error(err));
       
     fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/api/hotspots`)
-      .then((res) => res.json())
-      .then((data) => setHotspots(data.hotspots));
+      .then((res) => res.ok ? res.json() : { hotspots: [] })
+      .then((data) => setHotspots(Array.isArray(data?.hotspots) ? data.hotspots : []))
+      .catch((err) => console.error(err));
   }, []);
 
   // Bengaluru center
