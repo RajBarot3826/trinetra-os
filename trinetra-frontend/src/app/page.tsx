@@ -1,63 +1,92 @@
-import Image from "next/image";
+import CrimeMap from "./components/CrimeMap";
+import NetworkGraph from "./components/NetworkGraph";
+import CrimeGPT from "./components/CrimeGPT";
+import { ShieldAlert, Activity, Users, MapPin } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-gray-950 text-gray-100 p-6 font-sans">
+      <header className="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+        <div>
+          <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 flex items-center gap-3">
+            <ShieldAlert className="w-8 h-8 text-cyan-500" />
+            Project TRINETRA
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <p className="text-gray-400 text-sm mt-1 font-mono">AI CRIME INTELLIGENCE OPERATING SYSTEM v1.0</p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="flex gap-4">
+          <div className="bg-gray-900 border border-red-900/50 rounded-lg p-3 flex items-center gap-3">
+            <Activity className="w-5 h-5 text-red-500" />
+            <div>
+              <p className="text-xs text-gray-500 font-bold uppercase">Threat Level</p>
+              <p className="text-red-500 font-mono text-lg font-bold">ELEVATED</p>
+            </div>
+          </div>
+          <div className="bg-gray-900 border border-cyan-900/50 rounded-lg p-3 flex items-center gap-3">
+            <MapPin className="w-5 h-5 text-cyan-500" />
+            <div>
+              <p className="text-xs text-gray-500 font-bold uppercase">Active Hotspots</p>
+              <p className="text-cyan-400 font-mono text-lg font-bold">4</p>
+            </div>
+          </div>
+          <div className="bg-gray-900 border border-blue-900/50 rounded-lg p-3 flex items-center gap-3">
+            <Users className="w-5 h-5 text-blue-500" />
+            <div>
+              <p className="text-xs text-gray-500 font-bold uppercase">Active Networks</p>
+              <p className="text-blue-400 font-mono text-lg font-bold">12</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-6">
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-2xl">
+            <h2 className="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-cyan-500" />
+              Live Geospatial Intelligence & Hotspots
+            </h2>
+            <CrimeMap />
+          </div>
+          
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-2xl">
+            <h2 className="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
+              <Users className="w-5 h-5 text-blue-500" />
+              Criminal Network Graph Analytics
+            </h2>
+            <NetworkGraph />
+          </div>
+        </div>
+
+        <div className="space-y-6">
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-2xl">
+            <h2 className="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
+              <ShieldAlert className="w-5 h-5 text-red-500" />
+              Recent AI Alerts
+            </h2>
+            <div className="space-y-3">
+              <div className="border-l-2 border-red-500 pl-3 py-1">
+                <p className="text-sm font-mono text-gray-300">Anomaly Detected: 8 Vehicle Thefts in Whitefield</p>
+                <p className="text-xs text-red-400 mt-1">Confidence: 94% | 15 mins ago</p>
+              </div>
+              <div className="border-l-2 border-amber-500 pl-3 py-1">
+                <p className="text-sm font-mono text-gray-300">Network Alert: Suspect 42 contacted Suspect 12</p>
+                <p className="text-xs text-amber-400 mt-1">Confidence: 88% | 1 hr ago</p>
+              </div>
+              <div className="border-l-2 border-cyan-500 pl-3 py-1">
+                <p className="text-sm font-mono text-gray-300">Prediction: Koramangala hotspot forming</p>
+                <p className="text-xs text-cyan-400 mt-1">Confidence: 85% | 3 hrs ago</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 shadow-2xl">
+            <h2 className="text-lg font-bold text-gray-300 mb-4 flex items-center gap-2">
+              <Activity className="w-5 h-5 text-cyan-500" />
+              CrimeGPT Copilot
+            </h2>
+            <CrimeGPT />
+          </div>
         </div>
       </main>
     </div>
